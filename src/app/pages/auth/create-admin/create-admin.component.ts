@@ -47,7 +47,8 @@ export class CreateAdminComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private auth: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private navigate: Router,
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +66,7 @@ export class CreateAdminComponent implements OnInit {
       .subscribe(
         ({ message }) => {
           this.openSnackBar(message, 'success-snackbar');
-          location.reload();
+          this.form.reset;
         },
         error => {
           if (error instanceof HttpErrorResponse) {
@@ -84,5 +85,9 @@ export class CreateAdminComponent implements OnInit {
       verticalPosition: 'top',
       panelClass,
     });
+  }
+
+  navigateToLogin(){
+    this.navigate.navigate(["/auth/login/"]);
   }
 }
